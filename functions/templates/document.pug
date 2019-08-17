@@ -14,8 +14,8 @@ style(type="text/css") !{compiledStyle}
 
   section.header
     .profile
-      if profile.tradingName
-        h2 #{profile.tradingName}
+      if profile.tradeName
+        h2 #{profile.tradeName}
         div #{profile.firstName} #{profile.lastName}
       else
         h2 #{profile.firstName} #{profile.lastName}
@@ -54,10 +54,10 @@ style(type="text/css") !{compiledStyle}
         else if document.type === 'credit'
           h3 Avoir à l'attention de :
 
-        if client.tradingName
-          div #{client.tradingName}
+        if client.siret
+          div #{client.name} (#{client.siret})
         else
-          div #{client.firstName} #{client.lastName}
+          div #{client.name}
         div #{client.address}
         div #{client.zip} #{client.city}, #{client.country}
 
@@ -100,7 +100,6 @@ style(type="text/css") !{compiledStyle}
         td(colspan=3)
           +toEuro(document.totalTTC)
 
-
   footer.footer
     .bank
       table
@@ -132,8 +131,8 @@ style(type="text/css") !{compiledStyle}
       div
         | Micro-entreprise :
         |
-        if profile.tradingName
-          span #{profile.tradingName} (#{profile.firstName} #{profile.lastName})
+        if profile.tradeName
+          span #{profile.tradeName} (#{profile.firstName} #{profile.lastName})
         else
           span #{profile.firstName} #{profile.lastName}
       div
@@ -150,3 +149,5 @@ style(type="text/css") !{compiledStyle}
         | Code APE : #{profile.apeCode}
       div
         | N° TVA Intracommunautaire : #{profile.taxId}
+      .credit
+        | Généré par factae.fr

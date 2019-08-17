@@ -17,15 +17,14 @@ module.exports = {
       bic: 'XXXXXXXX',
     },
     client: {
-      firstName: 'Paul',
-      lastName: 'SOUBOTA',
+      name: 'Paul SOUBOTA',
       address: '13 rue du port',
       zip: '67890',
       city: 'Mangelle',
       country: 'France',
     },
     document: {
-      type: 'quotation',
+      type: 'credit',
       createdAt: '2019-08-07T01:38:43.877Z',
       expiresAt: '2019-08-07T01:38:43.877Z',
       items: [
