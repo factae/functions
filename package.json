@@ -6,6 +6,9 @@
     "parcel-bundler": "^1.12.3"
   },
   "scripts": {
-    "start": "parcel --port 3001 --no-cache serve ./functions/templates/viewer.pug"
+    "start": "parcel --port 3001 --no-cache serve ./functions/templates/viewer.pug",
+    "deploy": "firebase deploy",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:functions": "cd functions && yarn deploy"
   }
 }

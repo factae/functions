@@ -69,7 +69,7 @@ style(type="text/css") !{compiledStyle}
   table.items
     thead.items-head
       tr
-        th Désignation
+        th Description
         th Quantité
         th Prix unitaire
         th Montant
@@ -129,25 +129,26 @@ style(type="text/css") !{compiledStyle}
 
     .contact
       div
-        | Micro-entreprise :
-        |
-        if profile.tradeName
-          span #{profile.tradeName} (#{profile.firstName} #{profile.lastName})
-        else
-          span #{profile.firstName} #{profile.lastName}
-      div
-        | #{profile.address},
-        | #{profile.zip} #{profile.city},
-        | France
-      div
-        | Email : #{profile.email}
-        | —
-        | Téléphone : #{profile.phone}
-      div
-        | SIRET : #{profile.siret}
-        | —
-        | Code APE : #{profile.apeCode}
-      div
-        | N° TVA Intracommunautaire : #{profile.taxId}
-      .credit
-        | Généré par factae.fr
+        div
+          | Micro-entreprise :
+          |
+          if profile.tradeName
+            span #{profile.tradeName} (#{profile.firstName} #{profile.lastName})
+          else
+            span #{profile.firstName} #{profile.lastName}
+        div
+          | #{profile.address},
+          | #{profile.zip} #{profile.city},
+          | France
+        div
+          | Email : #{profile.email}
+          | —
+          | Téléphone : #{profile.phone}
+        div
+          | SIRET : #{profile.siret}
+          | —
+          | Code APE : #{profile.apeCode}
+        div
+          | N° TVA Intracommunautaire : #{profile.taxId}
+        .credit
+          | Généré par factae.fr
