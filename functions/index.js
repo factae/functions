@@ -33,8 +33,17 @@ exports.generatePdf = functions.https.onCall(async htmlTemplateOptions => {
     file: path.resolve(__dirname, 'styles', 'styles.scss'),
   }
 
+  let filename = htmlTemplateOptions.document.type
+  if (htmlTemplateOptions.document.type !== 'quotation') {
+    filename += '-' + htmlTemplateOptions.document.number
+  }
+
   const pdfOptions = {
+    filename,
     format: 'A4',
+    displayHeaderFooter: true,
+    margin: {top: '80px', right: '80px', bottom: '80px', left: '80px'},
+    headerTemplate: '<span></span>',
   }
 
   const puppeteerOptions = {

@@ -30,11 +30,6 @@ h1 {
   }
 }
 
-.container {
-  margin: 0 auto;
-  padding: 6rem 4rem;
-}
-
 .header {
   display: flex;
   width: 100%;
@@ -54,6 +49,7 @@ h1 {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+  max-width: 250px;
 
   h3 {
     @include title()
@@ -72,7 +68,7 @@ h1 {
 
 .items {
   border-collapse: collapse;
-  margin: 3rem 0;
+  margin-top: 3rem;
   width: 100%;
 }
 
@@ -98,13 +94,16 @@ h1 {
 
     &:first-of-type {
       text-align: left;
+      font-size: .9rem;
     }
   }
 }
 
 .items-foot {
+  margin: 0 0 3rem 0;
+
   tr:nth-of-type(1) td {
-    border-top: 4px double $greyDD;
+    border-top: 4px double $greyDD !important;
     padding-top: .25rem;
   }
 
@@ -120,6 +119,7 @@ h1 {
   td {
     padding: 0 .75rem;
     text-align: right;
+    border: none !important;
 
     &:first-of-type {
       text-align: left;

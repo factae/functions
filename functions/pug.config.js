@@ -17,7 +17,7 @@ module.exports = {
       bic: 'XXXXXXXX',
     },
     client: {
-      name: 'Paul SOUBOTA',
+      name: 'Paul SOUBOTA toto tata tutu tott tuo tnohes tahoseut hasoe',
       address: '13 rue du port',
       zip: '67890',
       city: 'Mangelle',
