@@ -4,7 +4,7 @@ mixin toEuro(amount)
 style(type="text/css") !{compiledStyle}
 
 if document.type === 'quotation'
-  h1 Devis
+  h1 Devis n°#{document.number}
 else if document.type === 'invoice'
   h1 Facture n°#{document.number}
 else if document.type === 'credit'
@@ -21,29 +21,6 @@ section.header
     div #{profile.address}
     div #{profile.zip} #{profile.city}, France
 
-    .infos
-      div Créé le : #{document.createdAt}
-      if document.expiresAt
-        div Expire le : #{document.expiresAt}
-      if document.startsAt
-        div Début de la prestation : #{document.startsAt}
-      if document.endsAt
-        div Fin de la prestation : #{document.endsAt}
-      if document.rate
-        div
-          | Taux
-          |
-          if document.rateUnit === 'hour'
-            ='horaire'
-          else if document.rateUnit === 'day'
-            ='journalier'
-          else if document.rateUnit === 'service'
-            ='par prestation'
-          |
-          | :
-          |
-          +toEuro(document.rate)
-
   .client
     div
       if document.type === 'quotation'
@@ -59,11 +36,6 @@ section.header
         div #{client.name}
       div #{client.address}
       div #{client.zip} #{client.city}, #{client.country}
-
-if document.conditions
-  .conditions
-    each condition in document.conditions.split('\n')
-      div #{condition}
 
 table.items
   thead.items-head
@@ -98,6 +70,14 @@ table.items.items-foot
     td(width='40%') Total TTC
     td(colspan=3)
       +toEuro(document.totalTTC)
+
+if document.conditions
+  .conditions
+    div Date d'émission : #{document.createdAt}
+    if document.type === 'quotation'
+      div Date d'expiration de l'offre : #{document.expiresAt}
+    each condition in document.conditions.split('\n')
+      div #{condition}
 
 footer.footer
   .bank
