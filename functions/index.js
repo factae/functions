@@ -3,10 +3,19 @@ const {DateTime} = require('luxon')
 const TeaSchool = require('tea-school')
 const Stripe = require('stripe')
 const admin = require('firebase-admin')
+const nodemailer = require('nodemailer')
 const path = require('path')
 
 const firestore = admin.initializeApp().firestore()
 const stripe = new Stripe(String(process.env.STRIPE_API_KEY))
+const transporter = nodemailer.createTransport({
+  host: process.env.MAILGUN_HOST,
+  port: 587,
+  auth: {
+    user: process.env.MAILGUN_USER,
+    pass: process.env.MAILGUN_PASS,
+  },
+})
 
 function formatDate(iso) {
   return DateTime.fromISO(iso).toFormat('dd/LL/yyyy')
@@ -83,4 +92,8 @@ exports.charge = functions.https.onCall(async ({userId, token}) => {
   await userDoc.update({expiresAt: expiresAt.toJSDate()})
 
   return {success: true, expiresAt: expiresAt.toISO()}
+})
+
+exports.sendMail = functions.https.onCall(async ({from, to, subject, message}) => {
+  await transporter.sendMail({from, to, subject, html: message})
 })
