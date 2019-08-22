@@ -74,7 +74,7 @@ if document.conditions
   .conditions
     if document.type === 'quotation'
       div Devis n°#{document.number}
-      div Date d'expiration de l'offre : #{document.expiresAt}
+      div Durée de validité : #{document.expiresIn} jours
     else if document.type === 'invoice'
       div Facture n°#{document.number}
     else if document.type === 'credit'

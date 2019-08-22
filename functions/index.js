@@ -24,18 +24,6 @@ function formatDate(iso) {
 exports.generatePdf = functions.https.onCall(async htmlTemplateOptions => {
   htmlTemplateOptions.document.createdAt = formatDate(htmlTemplateOptions.document.createdAt)
 
-  if (htmlTemplateOptions.document.expiresAt) {
-    htmlTemplateOptions.document.expiresAt = formatDate(htmlTemplateOptions.document.expiresAt)
-  }
-
-  if (htmlTemplateOptions.document.startsAt) {
-    htmlTemplateOptions.document.startsAt = formatDate(htmlTemplateOptions.document.startsAt)
-  }
-
-  if (htmlTemplateOptions.document.endsAt) {
-    htmlTemplateOptions.document.endsAt = formatDate(htmlTemplateOptions.document.endsAt)
-  }
-
   const htmlTemplatePath = path.resolve(__dirname, 'templates', 'document.pug')
 
   const styleOptions = {
@@ -94,6 +82,6 @@ exports.charge = functions.https.onCall(async ({userId, token}) => {
   return {success: true, expiresAt: expiresAt.toISO()}
 })
 
-exports.sendMail = functions.https.onCall(async ({from, to, subject, message}) => {
-  await transporter.sendMail({from, to, subject, html: message})
+exports.sendMail = functions.https.onCall(async options => {
+  await transporter.sendMail(options)
 })
