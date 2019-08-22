@@ -4,12 +4,11 @@ mixin toEuro(amount)
 style(type="text/css") !{compiledStyle}
 
 if document.type === 'quotation'
-  h1 Devis n°#{document.number}
+  h1 Devis
 else if document.type === 'invoice'
-  h1 Facture n°#{document.number}
+  h1 Facture
 else if document.type === 'credit'
-  h1 Avoir n°#{document.number}
-  em Facture de référence n°#{document.invoiceNumber}
+  h1 Avoir
 
 section.header
   .profile
@@ -73,9 +72,16 @@ table.items.items-foot
 
 if document.conditions
   .conditions
-    div Date d'émission : #{document.createdAt}
     if document.type === 'quotation'
+      div Devis n°#{document.number}
       div Date d'expiration de l'offre : #{document.expiresAt}
+    else if document.type === 'invoice'
+      div Facture n°#{document.number}
+    else if document.type === 'credit'
+      div Avoir n°#{document.number}
+      div Facture de référence n°#{document.invoiceNumber}
+    div Date d'émission : #{document.createdAt}
+
     each condition in document.conditions.split('\n')
       div #{condition}
 
