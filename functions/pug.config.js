@@ -25,8 +25,9 @@ module.exports = {
     },
     document: {
       type: 'credit',
-      createdAt: '2019-08-07T01:38:43.877Z',
-      expiresAt: '2019-08-07T01:38:43.877Z',
+      createdAt: '01/01/2019',
+      expiresAt: '01/01/2019',
+      paymentDeadlineAt: '01/01/2019',
       items: [
         {designation: 'item a', quantity: 1, unitPrice: 200, amount: 200},
         {designation: 'item b', quantity: 2, unitPrice: 150.4, amount: 300.8},

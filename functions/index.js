@@ -24,6 +24,12 @@ function formatDate(iso) {
 exports.generatePdf = functions.https.onCall(async htmlTemplateOptions => {
   htmlTemplateOptions.document.createdAt = formatDate(htmlTemplateOptions.document.createdAt)
 
+  if (htmlTemplateOptions.document.paymentDeadlineAt) {
+    htmlTemplateOptions.document.paymentDeadlineAt = formatDate(
+      htmlTemplateOptions.document.paymentDeadlineAt,
+    )
+  }
+
   const htmlTemplatePath = path.resolve(__dirname, 'templates', 'document.pug')
 
   const styleOptions = {
