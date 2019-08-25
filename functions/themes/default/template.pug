@@ -98,8 +98,8 @@ if document.conditions
   .conditions
     each condition in document.conditions.split('\n')
       div #{condition}
-  if !profile.taxId
-    div TVA non applicable, art. 293 B du CGI
+    if !profile.taxId
+      div TVA non applicable, art. 293 B du CGI
 
 footer.footer
   div

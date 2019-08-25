@@ -19,6 +19,7 @@ body {
   color: $black;
   font-family: Helvetica Neue, sans-serif;
   font-size: 1rem;
+  -webkit-print-color-adjust: exact;
 }
 
 .header {
@@ -79,7 +80,7 @@ body {
 .items-head th {
   text-align: right;
   border: 1px solid $greyDD;
-  background: $blueE6;
+  background: #e6f7ff;
   padding: 6px 12px;
 
   &:first-of-type {

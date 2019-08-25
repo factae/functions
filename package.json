@@ -7,7 +7,8 @@
     "prettier": "^1.18.2"
   },
   "scripts": {
-    "start": "parcel --port 3001 --no-cache serve ./functions/themes/${THEME:-default}/viewer.pug",
+    "start": "parcel --port 3001 --no-cache serve ./functions/themes/${THEME:-default}/preview.pug",
+    "build": "node functions/preview.js",
     "deploy": "firebase deploy",
     "deploy:hosting": "firebase deploy --only hosting",
     "deploy:functions": "cd functions && yarn deploy"
