@@ -17,32 +17,27 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-function formatDate(iso) {
-  return DateTime.fromISO(iso).toFormat('dd/LL/yyyy')
+function formatDate(dateISO) {
+  if (!dateISO) return null
+  return DateTime.fromISO(dateISO).toFormat('dd/LL/yyyy')
 }
 
 exports.generatePdf = functions.https.onCall(async htmlTemplateOptions => {
+  const theme = htmlTemplateOptions.theme || 'default'
+
   htmlTemplateOptions.document.createdAt = formatDate(htmlTemplateOptions.document.createdAt)
+  htmlTemplateOptions.document.paymentDeadlineAt = formatDate(
+    htmlTemplateOptions.document.paymentDeadlineAt,
+  )
 
-  if (htmlTemplateOptions.document.paymentDeadlineAt) {
-    htmlTemplateOptions.document.paymentDeadlineAt = formatDate(
-      htmlTemplateOptions.document.paymentDeadlineAt,
-    )
-  }
-
-  const htmlTemplatePath = path.resolve(__dirname, 'templates', 'document.pug')
+  const htmlTemplatePath = path.resolve(__dirname, 'themes', theme, 'template.pug')
 
   const styleOptions = {
-    file: path.resolve(__dirname, 'styles', 'styles.scss'),
-  }
-
-  let filename = htmlTemplateOptions.document.type
-  if (htmlTemplateOptions.document.type !== 'quotation') {
-    filename += '-' + htmlTemplateOptions.document.number
+    file: path.resolve(__dirname, 'themes', theme, 'styles.scss'),
   }
 
   const pdfOptions = {
-    filename,
+    filename: htmlTemplateOptions.document.number + '.pdf',
     format: 'A4',
     displayHeaderFooter: true,
     margin: {top: '80px', right: '80px', bottom: '80px', left: '80px'},

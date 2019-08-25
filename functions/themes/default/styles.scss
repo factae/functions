@@ -1,0 +1,151 @@
+$black: #333333;
+$grey99: #777777;
+$greyDD: #dddddd;
+$blueE6: #e6f7ff;
+
+@font-face {
+  font-family: Helvetica Neue;
+  src: url(https://factae-dev.firebaseapp.com/fonts/helvetica-neue.ttf) format('truetype');
+  font-weight: 400;
+}
+
+@mixin title {
+  color: $black;
+  margin: 0 0 .5rem 0;
+  font-size: 1rem;
+}
+
+body {
+  color: $black;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 1rem;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.profile {
+  flex: 1;
+
+  h2 {
+    @include title()
+  }
+}
+
+.title {
+  font-size: 2.5rem;
+  letter-spacing: 4px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  display: block;
+  color: $grey99;
+}
+
+.client-name {
+  @include title()
+}
+
+.client {
+  margin: 3rem 0;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  max-width: 250px;
+}
+
+.meta-value {
+  color: $grey99;
+  font-style: italic;
+}
+
+.items {
+  border-collapse: collapse;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.items-head th {
+  text-align: right;
+  border: 1px solid $greyDD;
+  background: $blueE6;
+  padding: 6px 12px;
+
+  &:first-of-type {
+    text-align: left;
+  }
+}
+
+.items-body {
+  td {
+    font-size: 1rem;
+    text-align: right;
+    padding: 6px 12px;
+    border: 1px solid $greyDD;
+
+    &:first-of-type {
+      text-align: left;
+      font-size: .9rem;
+    }
+  }
+}
+
+.items-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0 3rem 0;
+  
+  table {
+    border-collapse: collapse;
+  }
+
+  td {
+    font-size: 1rem;
+    text-align: right;
+    padding: 6px 12px;
+    border: 1px solid $greyDD;
+
+    &:first-of-type {
+      text-align: left;
+    }
+  }
+
+  tr:nth-of-type(3) td {
+    font-weight: bold;
+    font-style: italic;
+  }
+}
+
+.conditions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: .8rem;
+  flex: 1;
+  color: $grey99;
+}
+
+.footer {
+  font-style: italic;
+  border-top: 1px solid $greyDD;
+  text-align: center;
+  font-size: .7rem;
+  margin: 1.5rem 0 0 0;
+  padding-top: 1.5rem;
+  color: $grey99;
+}
+
+.credit {
+  margin-top: .5rem;
+}

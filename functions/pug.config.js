@@ -24,13 +24,13 @@ module.exports = {
       country: 'France',
     },
     document: {
-      type: 'credit',
+      type: 'quotation',
       createdAt: '01/01/2019',
-      expiresAt: '01/01/2019',
+      expiresIn: 60,
       paymentDeadlineAt: '01/01/2019',
       items: [
-        {designation: 'item a', quantity: 1, unitPrice: 200, amount: 200},
-        {designation: 'item b', quantity: 2, unitPrice: 150.4, amount: 300.8},
+        {designation: 'item a', quantity: 1, unitPrice: 33200, amount: 33200},
+        {designation: 'item b', quantity: 2, unitPrice: 13350.4, amount: 33300.8},
         {
           designation:
             'item very very very very very very very very very very very very very very very very very very very very very very long',
@@ -39,7 +39,7 @@ module.exports = {
           amount: 300.8,
         },
       ],
-      number: 50,
+      number: 'F-1908-3923428',
       invoiceNumber: 40,
       rate: 200,
       rateUnit: 'hour',

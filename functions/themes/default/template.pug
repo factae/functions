@@ -1,0 +1,123 @@
+mixin toEuro(amount)
+  =(new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'})).format(Number(amount)).replace(/\u202F/g, ' ')
+
+style(type="text/css") !{compiledStyle}
+
+section.header
+  .header-left
+    .profile
+      if profile.tradeName
+        h2 #{profile.tradeName}
+        div #{profile.firstName} #{profile.lastName}
+      else
+        h2 #{profile.firstName} #{profile.lastName}
+      div #{profile.address}
+      div #{profile.zip} #{profile.city}, France
+      div #{profile.email}
+      div #{profile.phone}
+
+    .meta
+      table
+        tbody
+          tr
+            td Date d'émission
+            td :
+            td.meta-value #{document.createdAt}
+          if document.type === 'quotation'
+            tr
+              td Durée de validité
+              td :
+              td.meta-value #{document.expiresIn} jours
+          else
+            tr
+              td Date limite de paiement
+              td :
+              td.meta-value #{document.paymentDeadlineAt}
+            if document.type === 'credit'
+              tr
+                td Facture de référence n°
+                td :
+                td.meta-value #{document.invoiceNumber}
+
+  .header-right
+    h1.title
+      if document.type === 'quotation'
+        | Devis 
+      else if document.type === 'invoice'
+        | Facture
+      else if document.type === 'credit'
+        | Avoir
+    em.subtitle n° #{document.number}
+
+    .client
+      div
+        h3.client-name
+          if client.siret
+            | #{client.name} (#{client.siret})
+          else
+            | #{client.name}
+        div #{client.address}
+        div #{client.zip} #{client.city}, #{client.country}
+
+table.items
+  thead.items-head
+    tr
+      th Description
+      th Quantité
+      th Prix unitaire
+      th Total
+
+  tbody.items-body
+    each item in document.items
+      tr
+        td(width='55%') #{item.designation}
+        td(width='5%') #{item.quantity}
+        td(width='20%')
+          +toEuro(item.unitPrice)
+        td(width='20%')
+          +toEuro(item.amount)
+
+.items-foot
+  table
+    tr
+      td Total HT
+      td
+        +toEuro(document.totalHT)
+
+    tr
+      td Total TVA (#{document.taxRate}%)
+      td
+        +toEuro(document.totalTVA)
+
+    tr
+      td Total TTC
+      td
+        +toEuro(document.totalTTC)
+
+if document.conditions
+  .conditions
+    each condition in document.conditions.split('\n')
+      div #{condition}
+  if !profile.taxId
+    div TVA non applicable, art. 293 B du CGI
+
+footer.footer
+  div
+    | Micro-entreprise
+    | —
+    | SIRET : #{profile.siret}
+    | —
+    | Code APE : #{profile.apeCode}
+    if profile.taxId
+      | N° TVA Intracommunautaire : #{profile.taxId}
+
+  if profile.rib && profile.iban && profile.bic
+    div
+      | RIB : #{profile.rib}
+      | —
+      | IBAN : #{profile.iban}
+      | —
+      | BIC : #{profile.iban}
+
+  .credit
+    | Généré par factae.fr
