@@ -4,7 +4,8 @@ const fs = require('fs')
 const generatePdf = require('./generatePdf')
 const data = require('./pug.config').locals
 
-const preview = path.resolve(__dirname, 'themes', process.env.THEME || 'default', 'preview.pdf')
+const theme = process.env.THEME || 'default'
+const preview = path.resolve(__dirname, 'themes', theme, 'preview.pdf')
 
 generatePdf(data)
   .then(blob => fs.writeFileSync(preview, blob, 'base64'))

@@ -1,7 +1,6 @@
 $black: #333333;
-$grey99: #777777;
+$grey77: #777777;
 $greyDD: #dddddd;
-$blueE6: #e6f7ff;
 
 @font-face {
   font-family: Helvetica Neue;
@@ -51,7 +50,7 @@ body {
 
 .subtitle {
   display: block;
-  color: $grey99;
+  color: $grey77;
 }
 
 .client-name {
@@ -67,7 +66,7 @@ body {
 }
 
 .meta-value {
-  color: $grey99;
+  color: $grey77;
   font-style: italic;
 }
 
@@ -79,8 +78,7 @@ body {
 
 .items-head th {
   text-align: right;
-  border: 1px solid $greyDD;
-  background: $blueE6;
+  border-bottom: 1px solid $grey77;
   padding: 6px 12px;
 
   &:first-of-type {
@@ -89,11 +87,14 @@ body {
 }
 
 .items-body {
+  tr:not(:last-of-type) td {
+    border-bottom: 1px solid $greyDD;
+  }
+
   td {
     font-size: 1rem;
     text-align: right;
     padding: 6px 12px;
-    border: 1px solid $greyDD;
 
     &:first-of-type {
       text-align: left;
@@ -103,28 +104,30 @@ body {
 }
 
 .items-foot {
-  display: flex;
-  justify-content: flex-end;
-  margin: 1rem 0 3rem 0;
-  
-  table {
-    border-collapse: collapse;
+  margin: 0 0 3rem 0;
+
+  tr:nth-of-type(1) td {
+    border-top: 4px double $greyDD !important;
+    padding-top: .25rem;
   }
 
-  td {
-    font-size: 1rem;
-    text-align: right;
-    padding: 6px 12px;
-    border: 1px solid $greyDD;
-
-    &:first-of-type {
-      text-align: left;
-    }
+  tr:nth-of-type(2) td {
+    padding-bottom: .5rem;
   }
 
   tr:nth-of-type(3) td {
     font-weight: bold;
     font-style: italic;
+  }
+
+  td {
+    padding: 0 .75rem;
+    text-align: right;
+    border: none !important;
+
+    &:first-of-type {
+      text-align: left;
+    }
   }
 }
 
@@ -134,15 +137,14 @@ body {
   justify-content: center;
   font-size: .8rem;
   flex: 1;
-  color: $grey99;
+  color: $grey77;
 }
 
 .footer {
   font-style: italic;
-  border-top: 1px solid $greyDD;
   text-align: center;
   font-size: .7rem;
   margin: 1.5rem 0 0 0;
   padding-top: 1.5rem;
-  color: $grey99;
+  color: $grey77;
 }

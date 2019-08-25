@@ -8,7 +8,7 @@ function formatDate(dateISO) {
 }
 
 async function generatePdf(htmlTemplateOptions) {
-  const theme = htmlTemplateOptions.profile.theme || 'default'
+  const theme = process.env.THEME || htmlTemplateOptions.profile.theme || 'default'
 
   htmlTemplateOptions.document.createdAt = formatDate(htmlTemplateOptions.document.createdAt)
   htmlTemplateOptions.document.paymentDeadlineAt = formatDate(
