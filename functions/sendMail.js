@@ -10,7 +10,11 @@ const transporter = nodemailer.createTransport({
 })
 
 async function sendMail(options) {
-  await transporter.sendMail(options)
+  if (options.from === 'demo@factae.fr') {
+    throw new Error()
+  } else {
+    await transporter.sendMail(options)
+  }
 }
 
 module.exports = sendMail
