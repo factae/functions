@@ -29,12 +29,19 @@ module.exports = {
       expiresIn: 60,
       paymentDeadlineAt: '01/01/2019',
       items: [
-        {designation: 'item a', quantity: 1, unitPrice: 33200, amount: 33200},
-        {designation: 'item b', quantity: 2, unitPrice: 13350.4, amount: 33300.8},
+        {designation: 'item a', quantity: 1, unit: 'unit-unit', unitPrice: 33200, amount: 33200},
+        {
+          designation: 'item b',
+          quantity: 2,
+          unit: 'unit-unit',
+          unitPrice: 13350.4,
+          amount: 33300.8,
+        },
         {
           designation:
             'item very very very very very very very very very very very very very very very very very very very very very very long',
           quantity: 2,
+          unit: 'unit-unit',
           unitPrice: 150.4,
           amount: 300.8,
         },

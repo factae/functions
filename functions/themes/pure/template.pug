@@ -1,6 +1,16 @@
 mixin toEuro(amount)
   =(new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'})).format(Number(amount)).replace(/\u202F/g, ' ')
 
+mixin renderUnit(unit)
+  if unit == 'hour-unit'
+    ='heure'
+  else if unit == 'day-unit'
+    ='jour'
+  else if unit == 'delivery-unit'
+    ='prest.'
+  else
+    ='unité'
+
 style(type="text/css") !{compiledStyle}
 
 section.header
@@ -67,17 +77,20 @@ table.items
     tr
       th Description
       th Quantité
-      th Prix unitaire
+      th Unité
+      th Prix unit.
       th Total
 
   tbody.items-body
     each item in document.items
       tr
-        td(width='55%') #{item.designation}
-        td(width='5%') #{item.quantity}
-        td(width='20%')
+        td(width='50%') #{item.designation}
+        td(width='10%') #{item.quantity}
+        td(width='10%')
+          +renderUnit(item.unit)
+        td(width='15%')
           +toEuro(item.unitPrice)
-        td(width='20%')
+        td(width='15%')
           +toEuro(item.amount)
 
 table.items.items-foot
