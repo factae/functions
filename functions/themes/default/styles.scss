@@ -121,11 +121,11 @@ body {
       text-align: left;
     }
   }
+}
 
-  tr:nth-of-type(3) td {
-    font-weight: bold;
-    font-style: italic;
-  }
+.items-total td {
+  font-weight: bold;
+  font-style: italic;
 }
 
 .conditions {

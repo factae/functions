@@ -111,15 +111,6 @@ body {
     padding-top: .25rem;
   }
 
-  tr:nth-of-type(2) td {
-    padding-bottom: .5rem;
-  }
-
-  tr:nth-of-type(3) td {
-    font-weight: bold;
-    font-style: italic;
-  }
-
   td {
     padding: 0 .75rem;
     text-align: right;
@@ -129,6 +120,12 @@ body {
       text-align: left;
     }
   }
+}
+
+.items-total td {
+  padding-bottom: .5rem;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .conditions {

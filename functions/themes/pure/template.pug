@@ -78,7 +78,18 @@ table.items
           +toEuro(item.amount)
 
 table.items.items-foot
-  tr
+  if document.discountRate > 0
+    tr
+      td(width='40%') Sous-total
+      td(colspan=3)
+        +toEuro(document.subtotal)
+
+    tr
+      td(width='40%') Total remise (#{document.discountRate}%)
+      td(colspan=3)
+        +toEuro(document.totalDiscount)
+
+  tr.items-total
     td(width='40%') Total HT
     td(colspan=3)
       +toEuro(document.totalHT)
@@ -88,7 +99,7 @@ table.items.items-foot
     td(colspan=3)
       +toEuro(document.totalTVA)
 
-  tr
+  tr.items-total
     td(width='40%') Total TTC
     td(colspan=3)
       +toEuro(document.totalTTC)
