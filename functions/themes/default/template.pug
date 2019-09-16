@@ -19,6 +19,9 @@ section.header
     .meta
       table
         tbody
+          if document.entitled
+            tr
+              td.entitled(span=3) #{document.entitled}
           tr
             td Date d'émission
             td :

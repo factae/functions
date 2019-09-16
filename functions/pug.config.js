@@ -41,6 +41,7 @@ module.exports = {
       ],
       number: 'F-1908-3923428',
       invoiceNumber: 40,
+      entitled: 'Document entitled',
       taxRate: 20,
       conditions: 'Condition A\nCondition B',
       subtotal: 100,
