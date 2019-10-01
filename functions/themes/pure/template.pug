@@ -1,16 +1,3 @@
-mixin toEuro(amount)
-  =(new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'})).format(Number(amount)).replace(/\u202F/g, ' ')
-
-mixin renderUnit(unit)
-  if unit == 'hour-unit'
-    ='heure'
-  else if unit == 'day-unit'
-    ='jour'
-  else if unit == 'delivery-unit'
-    ='prest.'
-  else
-    ='unité'
-
 style(type="text/css") !{compiledStyle}
 
 section.header
@@ -86,39 +73,31 @@ table.items
       tr
         td(width='50%') #{item.designation}
         td(width='10%') #{item.quantity}
-        td(width='10%')
-          +renderUnit(item.unit)
-        td(width='15%')
-          +toEuro(item.unitPrice)
-        td(width='15%')
-          +toEuro(item.amount)
+        td(width='10%') #{item.unit}
+        td(width='15%') #{item.unitPrice}
+        td(width='15%') #{item.amount}
 
 table.items.items-foot
   if document.discountRate > 0
     tr
       td(width='40%') Sous-total
-      td(colspan=3)
-        +toEuro(document.subtotal)
+      td(colspan=3) #{document.subtotal}
 
     tr
       td(width='40%') Total remise (#{document.discountRate}%)
-      td(colspan=3)
-        +toEuro(document.totalDiscount)
+      td(colspan=3) #{document.totalDiscount}
 
   tr.items-total
     td(width='40%') Total HT
-    td(colspan=3)
-      +toEuro(document.totalHT)
+    td(colspan=3) #{document.totalHT}
 
   tr
     td(width='40%') Total TVA (#{document.taxRate}%)
-    td(colspan=3)
-      +toEuro(document.totalTVA)
+    td(colspan=3) #{document.totalTVA}
 
   tr.items-total
     td(width='40%') Total TTC
-    td(colspan=3)
-      +toEuro(document.totalTTC)
+    td(colspan=3) #{document.totalTTC}
 
 if document.conditions
   .conditions
@@ -135,13 +114,15 @@ footer.footer
     | —
     | Code APE : #{profile.apeCode}
     if profile.taxId
-      | N° TVA Intracommunautaire : #{profile.taxId}
+      div
+        | N° TVA Intracommunautaire : #{profile.taxId}
 
   if profile.rib && profile.iban && profile.bic
     div
       | RIB : #{profile.rib}
       | —
       | IBAN : #{profile.iban}
-      | —
+    div
       | BIC : #{profile.iban}
+  br
   div Généré par factae.fr

@@ -1,19 +1,51 @@
 const {DateTime} = require('luxon')
 const TeaSchool = require('tea-school')
 const path = require('path')
+const intl = require('intl')
 
 function formatDate(dateISO) {
   if (!dateISO) return null
   return DateTime.fromISO(dateISO).toFormat('dd/LL/yyyy')
 }
 
-async function generatePdf(htmlTemplateOptions) {
-  const theme = process.env.THEME || htmlTemplateOptions.profile.documentsTheme || 'default'
+function formatNumber(number) {
+  return intl
+    .NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'})
+    .format(Number(number))
+    .replace(/\u202F/g, ' ')
+}
 
-  htmlTemplateOptions.document.createdAt = formatDate(htmlTemplateOptions.document.createdAt)
-  htmlTemplateOptions.document.paymentDeadlineAt = formatDate(
-    htmlTemplateOptions.document.paymentDeadlineAt,
-  )
+function formatUnit(unit) {
+  switch (unit) {
+    case 'unit-hour':
+      return 'heure'
+    case 'unit-day':
+      return 'jour'
+    case 'unit-delivery':
+      return 'service'
+    default:
+    case 'unit-unit':
+      return 'unité'
+  }
+}
+
+async function generatePdf(data) {
+  const theme = process.env.THEME || data.profile.documentsTheme || 'default'
+
+  data.document.subtotal = formatNumber(data.document.subtotal)
+  data.document.totalDiscount = formatNumber(data.document.totalDiscount)
+  data.document.totalHT = formatNumber(data.document.totalHT)
+  data.document.totalTVA = formatNumber(data.document.totalTVA)
+  data.document.totalTTC = formatNumber(data.document.totalTTC)
+  data.document.items = data.document.items.map(i => {
+    i.unitPrice = formatNumber(i.unitPrice)
+    i.amount = formatNumber(i.amount)
+    i.unit = formatUnit(i.unit)
+    return i
+  })
+
+  data.document.createdAt = formatDate(data.document.createdAt)
+  data.document.paymentDeadlineAt = formatDate(data.document.paymentDeadlineAt)
 
   const htmlTemplatePath = path.resolve(__dirname, 'themes', theme, 'template.pug')
 
@@ -22,7 +54,7 @@ async function generatePdf(htmlTemplateOptions) {
   }
 
   const pdfOptions = {
-    filename: htmlTemplateOptions.document.number + '.pdf',
+    filename: data.document.number + '.pdf',
     format: 'A4',
     displayHeaderFooter: true,
     margin: {top: '80px', right: '80px', bottom: '80px', left: '80px'},
@@ -35,8 +67,8 @@ async function generatePdf(htmlTemplateOptions) {
   }
 
   const teaSchoolOptions = {
+    htmlTemplateOptions: data,
     htmlTemplatePath,
-    htmlTemplateOptions,
     styleOptions,
     pdfOptions,
     puppeteerOptions,
