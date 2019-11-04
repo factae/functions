@@ -21,7 +21,7 @@ async function charge({userId, token}) {
   }
 
   const createdAt = DateTime.fromSeconds(transaction.created)
-  const expiresAt = createdAt.plus({months: 12})
+  const expiresAt = createdAt.plus({months: 1})
   await userDoc.update({expiresAt: expiresAt.toJSDate()})
 
   return {success: true, expiresAt: expiresAt.toISO()}
