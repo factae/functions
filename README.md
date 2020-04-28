@@ -1,3 +1,5 @@
+⚠️ *Project archived, due to lack of interest.*
+
 # Functions
 
 This repo contains the serverless part of factAE, based on [Firebase Cloud
